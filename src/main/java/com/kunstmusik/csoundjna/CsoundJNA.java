@@ -37,6 +37,11 @@ public class CsoundJNA {
                 + "schedule(1,0,10, 880)\n"
                 + "event_i(\"e\",11,11)\n"
         );
+
+        csound.setMessageCallback((cs,attr,msg) -> {
+            System.out.print(">> " + msg); 
+        });
+
         csound.start();
 
         Thread t = new Thread(() -> {

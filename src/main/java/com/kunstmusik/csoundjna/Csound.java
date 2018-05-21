@@ -5,6 +5,7 @@
  */
 package com.kunstmusik.csoundjna;
 
+import com.sun.jna.Callback;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
@@ -76,6 +77,10 @@ public class Csound {
         INSTANCE.csoundReset(csoundPtr);
     }
 
+    public void setMessageCallback(MessageCallback cb) {
+        INSTANCE.csoundSetMessageStringCallback(csoundPtr, cb);
+    }
+
     interface CsoundLib extends Library {
 
         Pointer csoundCreate(long l);
@@ -102,6 +107,11 @@ public class Csound {
 
         void csoundReset(Pointer p);
 
+        void csoundSetMessageStringCallback(Pointer p, 
+                MessageCallback cb);
     }
 
+    public static interface MessageCallback extends Callback {
+        void invoke(Pointer p, int attr, String msg);
+    }
 }
