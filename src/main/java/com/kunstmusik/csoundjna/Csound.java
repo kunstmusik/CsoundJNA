@@ -1,13 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Csound.java 
+ * Copyright (c) 2018 Steven Yi (stevenyi@gmail.com)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by  the Free Software Foundation; either version 2 of the License or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; see the file COPYING.LIB.  If not, write to
+ * the Free Software Foundation Inc., 59 Temple Place - Suite 330,
+ * Boston, MA  02111-1307 USA
  */
 package com.kunstmusik.csoundjna;
 
-import com.sun.jna.Callback;
-import com.sun.jna.Library;
-import com.sun.jna.Native;
+import static com.kunstmusik.csoundjna.CsoundLib.*;
 import com.sun.jna.Pointer;
 
 /**
@@ -16,102 +28,54 @@ import com.sun.jna.Pointer;
  */
 public class Csound {
 
-    public static final int CSOUNDINIT_NO_SIGNAL_HANDLER = 1;
-    public static final int CSOUNDINIT_NO_ATEXIT = 2;
-
-    private static final CsoundLib INSTANCE;
-
-    static {
-        // not sure this is best as it doesn't account for if libcsound64 
-        // is not found
-        INSTANCE = (CsoundLib) Native.loadLibrary("csound64", CsoundLib.class);
-    }
-
-    public static int initialize(int flags) {
-        return INSTANCE.csoundInitialize(flags);
-    }
-
     private final Pointer csoundPtr;
 
     public Csound() {
-        csoundPtr = INSTANCE.csoundCreate(0);
+        csoundPtr = csoundCreate(0);
     }
 
     public int getVersion() {
-        return INSTANCE.csoundGetVersion(csoundPtr);
+        return csoundGetVersion(csoundPtr);
     }
 
     public int setOption(String option) {
-        return INSTANCE.csoundSetOption(csoundPtr, option);
+        return csoundSetOption(csoundPtr, option);
     }
 
     public int compileOrc(String s) {
-        return INSTANCE.csoundCompileOrc(csoundPtr, s);
+        return csoundCompileOrc(csoundPtr, s);
     }
 
     public int compileOrcAsync(String s) {
-        return INSTANCE.csoundCompileOrcAsync(csoundPtr, s);
+        return csoundCompileOrcAsync(csoundPtr, s);
     }
 
     public int compileCsdText(String csdText) {
-        return INSTANCE.csoundCompileCsdText(csoundPtr, csdText);
+        return csoundCompileCsdText(csoundPtr, csdText);
     }
 
     public void start() {
-        INSTANCE.csoundStart(csoundPtr);
+        csoundStart(csoundPtr);
     }
 
     public void stop() {
-        INSTANCE.csoundStop(csoundPtr);
+        csoundStop(csoundPtr);
     }
 
     public int performKsmps() {
-        return INSTANCE.csoundPerformKsmps(csoundPtr);
+        return csoundPerformKsmps(csoundPtr);
     }
 
     public int cleanup() {
-        return INSTANCE.csoundCleanup(csoundPtr);
+        return csoundCleanup(csoundPtr);
     }
 
     public void reset() {
-        INSTANCE.csoundReset(csoundPtr);
+        csoundReset(csoundPtr);
     }
 
     public void setMessageCallback(MessageCallback cb) {
-        INSTANCE.csoundSetMessageStringCallback(csoundPtr, cb);
+        csoundSetMessageStringCallback(csoundPtr, cb);
     }
 
-    interface CsoundLib extends Library {
-
-        Pointer csoundCreate(long l);
-
-        int csoundGetVersion(Pointer p);
-
-        int csoundInitialize(int flags);
-
-        int csoundSetOption(Pointer p, String option);
-
-        int csoundCompileOrc(Pointer p, String str);
-
-        int csoundCompileOrcAsync(Pointer p, String str);
-
-        int csoundCompileCsdText(Pointer p, String csd_text);
-
-        int csoundPerformKsmps(Pointer p);
-
-        int csoundStart(Pointer p);
-
-        void csoundStop(Pointer p);
-
-        int csoundCleanup(Pointer p);
-
-        void csoundReset(Pointer p);
-
-        void csoundSetMessageStringCallback(Pointer p, 
-                MessageCallback cb);
-    }
-
-    public static interface MessageCallback extends Callback {
-        void invoke(Pointer p, int attr, String msg);
-    }
 }

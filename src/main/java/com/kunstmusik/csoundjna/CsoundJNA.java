@@ -1,7 +1,21 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * CsoundJNA.java 
+ * Copyright (c) 2018 Steven Yi (stevenyi@gmail.com)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by  the Free Software Foundation; either version 2 of the License or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; see the file COPYING.LIB.  If not, write to
+ * the Free Software Foundation Inc., 59 Temple Place - Suite 330,
+ * Boston, MA  02111-1307 USA
  */
 package com.kunstmusik.csoundjna;
 
@@ -15,12 +29,6 @@ import java.util.logging.Logger;
 public class CsoundJNA {
 
     public static void main(String args[]) {
-        // This pretty much needs to always happen when in a JVM app;
-        // maybe should just do this once within the static initializer block
-        // in Csound class...
-        Csound.initialize(Csound.CSOUNDINIT_NO_ATEXIT
-                | Csound.CSOUNDINIT_NO_SIGNAL_HANDLER);
-
         Csound csound = new Csound();
         System.out.println("Csound Version: " + csound.getVersion());
 
