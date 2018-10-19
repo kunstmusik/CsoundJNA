@@ -19,6 +19,7 @@
  */
 package com.kunstmusik.csoundjna;
 
+import java.nio.DoubleBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,7 +55,9 @@ public class CsoundJNA {
 
         Thread t = new Thread(() -> {
 
+            DoubleBuffer output = csound.getSpout();
             while (csound.performKsmps() == 0) {
+                System.out.println(output.get(0));
             }
             csound.stop();
 

@@ -25,7 +25,7 @@ import com.sun.jna.Pointer;
 
 /**
  * Wrapper class using JNA's DirectMapping system:
- * 
+ *
  * https://github.com/java-native-access/jna/blob/master/www/DirectMapping.md
  *
  * @author stevenyi
@@ -36,7 +36,7 @@ public class CsoundLib {
     public static final int CSOUNDINIT_NO_ATEXIT = 2;
 
     static {
-        String libname = (Platform.getOSType() == Platform.MAC) ? "CsoundLib64": "csound64";
+        String libname = (Platform.getOSType() == Platform.MAC) ? "CsoundLib64" : "csound64";
         Native.register(libname);
 
         // This pretty much needs to always happen when in a JVM app
@@ -69,4 +69,21 @@ public class CsoundLib {
 
     public static native void csoundSetMessageStringCallback(Pointer p,
             MessageCallback cb);
+
+    public static native int csoundGetSr(Pointer p);
+
+    public static native int csoundGetKr(Pointer p);
+
+    public static native int csoundGetKsmps(Pointer p);
+
+    public static native int csoundGetNchnls(Pointer p);
+
+    public static native int csoundGetNchnlsInput(Pointer p);
+
+    public static native double csoundGet0dBFS(Pointer p);
+
+    public static native Pointer csoundGetSpin(Pointer p);
+
+    public static native Pointer csoundGetSpout(Pointer p);
+
 }

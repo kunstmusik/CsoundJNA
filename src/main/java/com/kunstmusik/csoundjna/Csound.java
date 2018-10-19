@@ -21,6 +21,8 @@ package com.kunstmusik.csoundjna;
 
 import static com.kunstmusik.csoundjna.CsoundLib.*;
 import com.sun.jna.Pointer;
+import java.nio.ByteBuffer;
+import java.nio.DoubleBuffer;
 
 /**
  *
@@ -78,4 +80,22 @@ public class Csound {
         csoundSetMessageStringCallback(csoundPtr, cb);
     }
 
+    public DoubleBuffer getSpin(){
+        Pointer p = csoundGetSpin(csoundPtr);
+        int nchnls_i = csoundGetNchnlsInput(csoundPtr);
+        int ksmps = csoundGetKsmps(csoundPtr);
+        // 8 since double is 8 bytes in size
+        ByteBuffer b = p.getByteBuffer(0, nchnls_i * ksmps * 8);
+        return b.asDoubleBuffer();
+    }
+
+    public DoubleBuffer getSpout(){
+        Pointer p = csoundGetSpout(csoundPtr);
+        int nchnls = csoundGetNchnls(csoundPtr);
+        int ksmps = csoundGetKsmps(csoundPtr);
+
+        // 8 since double is 8 bytes in size
+        ByteBuffer b = p.getByteBuffer(0, nchnls * ksmps * 8);
+        return b.asDoubleBuffer();
+    }
 }
