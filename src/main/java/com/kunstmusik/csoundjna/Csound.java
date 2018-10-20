@@ -80,6 +80,30 @@ public class Csound {
         csoundSetMessageStringCallback(csoundPtr, cb);
     }
 
+    public int getSr() {
+        return csoundGetSr(csoundPtr);
+    }
+
+    public int getKr() {
+        return csoundGetKr(csoundPtr);
+    }
+
+    public int getKsmps() {
+        return csoundGetKsmps(csoundPtr);
+    }
+
+    public int getNchnls() {
+        return csoundGetNchnls(csoundPtr);
+    }
+
+    public int getNchnlsInput() {
+        return csoundGetNchnlsInput(csoundPtr);
+    }
+
+    public double get0dBFS() {
+        return csoundGet0dBFS(csoundPtr);
+    }
+    
     public DoubleBuffer getSpin(){
         Pointer p = csoundGetSpin(csoundPtr);
         int nchnls_i = csoundGetNchnlsInput(csoundPtr);
