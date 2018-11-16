@@ -1,5 +1,5 @@
 /*
- * CsoundLib.java 
+ * CsoundLib.java
  * Copyright (c) 2018 Steven Yi (stevenyi@gmail.com)
  *
  * This program is free software; you can redistribute it and/or modify
@@ -51,11 +51,21 @@ public class CsoundLib {
 
     public static native int csoundSetOption(Pointer p, String option);
 
+    public static native int csoundEvalCode(Pointer p, String str);
+
     public static native int csoundCompileOrc(Pointer p, String str);
 
     public static native int csoundCompileOrcAsync(Pointer p, String str);
 
     public static native int csoundCompileCsdText(Pointer p, String csd_text);
+
+    public static native int csoundInputMessage(Pointer p, String str);
+
+    public static native int csoundInputMessageAsync(Pointer p, String str);
+
+    public static native int csoundReadScore(Pointer p, String str);
+
+    public static native int csoundReadScoreAsync(Pointer p, String str);
 
     public static native int csoundPerformKsmps(Pointer p);
 

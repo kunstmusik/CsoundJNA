@@ -1,5 +1,5 @@
 /*
- * Csound.java 
+ * Csound.java
  * Copyright (c) 2018 Steven Yi (stevenyi@gmail.com)
  *
  * This program is free software; you can redistribute it and/or modify
@@ -44,6 +44,10 @@ public class Csound {
         return csoundSetOption(csoundPtr, option);
     }
 
+    public int evalCode(String s) {
+        return csoundEvalCode(csoundPtr, s);
+    }
+
     public int compileOrc(String s) {
         return csoundCompileOrc(csoundPtr, s);
     }
@@ -54,6 +58,22 @@ public class Csound {
 
     public int compileCsdText(String csdText) {
         return csoundCompileCsdText(csoundPtr, csdText);
+    }
+
+    public int inputMessage(String s) {
+        return csoundInputMessage(csoundPtr, s);
+    }
+
+    public int inputMessageAsync(String s) {
+        return csoundInputMessageAsync(csoundPtr, s);
+    }
+
+    public int readScore(String s) {
+        return csoundReadScore(csoundPtr, s);
+    }
+
+    public int readScoreAsync(String s) {
+        return csoundReadScoreAsync(csoundPtr, s);
     }
 
     public void start() {
