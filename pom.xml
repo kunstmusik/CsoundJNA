@@ -3,16 +3,16 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.kunstmusik</groupId>
     <artifactId>CsoundJNA</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
-    
+
     <scm>
         <connection>scm:git:https://github.com/kunstmusik/CsoundJNA.git</connection>
         <developerConnection>scm:git:git@github.com:kunstmusik/CsoundJNA.git</developerConnection>
         <url>https://github.com/kunstmusik/CsoundJNA</url>
         <tag>1.0.1</tag>
     </scm>
-    
+
     <dependencies>
         <dependency>
             <groupId>net.java.dev.jna</groupId>

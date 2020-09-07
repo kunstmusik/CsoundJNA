@@ -77,8 +77,19 @@ public class CsoundLib {
 
     public static native void csoundReset(Pointer p);
 
-    public static native void csoundSetMessageStringCallback(Pointer p,
-            MessageCallback cb);
+    public static native void csoundCreateMessageBuffer(Pointer p, int toStdOut);
+
+    public static native void csoundDestroyMessageBuffer(Pointer p);
+
+    public static native String csoundGetFirstMessage(Pointer p);
+
+    public static native int csoundGetFirstMessageAttr(Pointer p);
+
+    public static native int csoundGetMessageCnt(Pointer p);
+
+    public static native void csoundPopFirstMessage(Pointer p);
+
+    public static native void csoundSetMessageStringCallback(Pointer p, MessageCallback cb);
 
     public static native int csoundGetSr(Pointer p);
 
@@ -92,8 +103,15 @@ public class CsoundLib {
 
     public static native double csoundGet0dBFS(Pointer p);
 
+    public static native void csoundSetHostImplementedAudioIO(Pointer p, int state, int bufSize);
+
+    public static native int csoundPerformBuffer(Pointer p);
+
+    public static native Pointer csoundGetInputBuffer(Pointer p);
+
+    public static native Pointer csoundGetOutputBuffer(Pointer p);
+
     public static native Pointer csoundGetSpin(Pointer p);
 
     public static native Pointer csoundGetSpout(Pointer p);
-
 }
